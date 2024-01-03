@@ -9,16 +9,40 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
   late PageController _pageController;
   int totalPage = 4;
+  late AnimationController _titleAnimationController;
+  late Animation<double> _titleOpacityAnimation;
 
   @override
   void initState() {
     _pageController = PageController(
       initialPage: 0,
     );
+    _titleAnimationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 500),
+    );
+
+    _titleOpacityAnimation =
+        Tween<double>(begin: 0.0, end: 1.0).animate(_titleAnimationController);
+
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _titleAnimationController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    // Trigger the title animation when the widget is built
+    _titleAnimationController.forward();
+    super.didChangeDependencies();
   }
 
   @override
@@ -71,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
         decoration: BoxDecoration(
             gradient: LinearGradient(
           begin: Alignment.bottomRight,
-          stops: [
+          stops: const [
             0.3,
             0.9,
           ],
@@ -115,12 +139,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
+                  AnimatedOpacity(
+                    opacity: _titleOpacityAnimation.value,
+                    duration: Duration(seconds: 2),
+                    child: Text(
+                      title,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                   const SizedBox(
