@@ -1,16 +1,20 @@
-# trip_app_ui
+## Preview
+![Preview](assets/images/Travel.png)
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+travel_ui_app/
+│
+├── lib/
+│   ├── constants/
+│   ├── models/
+│   ├── screens/
+│   ├── widgets/
+│   ├── utils/  # Any helper functions or utilities can go here
+│   └── main.dart
+│
+├── assets/
+│   ├── images/ # Add your app images and graphics here
+│   └── icons/  # Add custom icons for the app here
+│
+├── pubspec.yaml  # Configuration and dependencies
+│
+└── README.md  # Project documentation
